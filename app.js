@@ -1,90 +1,47 @@
-var tareas = [];
+let tareas = [];
 
-function init() {
-    document.getElementById("footer").innerHTML =
-    "Entrega: WEB-01 | Grupo: 1 | Código: 123";
+window.onload = function () {
+    document.getElementById("taskForm").addEventListener("submit", agregarTarea);
+    document.getElementById("btnFocus").addEventListener("click", enfocarInput);
 
-    document.getElementById("addBtn").onclick = addTask;
+    document.getElementById("foot").textContent =
+        "Entrega: WEB-01 | Grupo: C | Código: 123";
+};
+
+function enfocarInput() {
+    document.getElementById("taskInput").focus();
 }
 
-function addTask() {
-    var input = document.getElementById("taskInput");
-    var texto = input.value;
+function agregarTarea(e) {
+    e.preventDefault();
 
-    if (texto == "") {
-        document.getElementById("message").innerHTML = "No puede estar vacío";
+    let input = document.getElementById("taskInput");
+    let texto = input.value.trim();
+
+    if (texto === "") {
+        alert("No puede estar vacío");
         return;
     }
 
-    var obj = {
-        id: new Date().getTime(),
-        text: texto,
-        done: false
+    let tarea = {
+        id: Date.now(),
+        text: texto
     };
 
-    tareas.push(obj);
+    tareas.push(tarea);
+
     input.value = "";
-    render();
+
+    mostrarTareas();
 }
 
-function toggleTask(id) {
-    for (var i = 0; i < tareas.length; i++) {
-        if (tareas[i].id == id) {
-            tareas[i].done = !tareas[i].done;
-        }
-    }
-    render();
-}
-
-function removeTask(id) {
-    for (var i = 0; i < tareas.length; i++) {
-        if (tareas[i].id == id) {
-            tareas.splice(i, 1);
-        }
-    }
-    render();
-}
-
-function render() {
-    var lista = document.getElementById("tasks");
+function mostrarTareas() {
+    let lista = document.getElementById("taskList");
     lista.innerHTML = "";
 
-    var pendientes = 0;
-
-    for (var i = 0; i < tareas.length; i++) {
-
-        if (tareas[i].done == false) {
-            pendientes++;
-        }
-
-        var li = document.createElement("li");
-
-        var span = document.createElement("span");
-        span.innerHTML = tareas[i].text;
-
-        span.onclick = (function(id){
-            return function() {
-                toggleTask(id);
-            }
-        })(tareas[i].id);
-
-        if (tareas[i].done) {
-            span.className = "done";
-        }
-
-        var btn = document.createElement("button");
-        btn.innerHTML = "Eliminar";
-
-        btn.onclick = (function(id){
-            return function() {
-                removeTask(id);
-            }
-        })(tareas[i].id);
-
-        li.appendChild(span);
-        li.appendChild(btn);
+    for (let i = 0; i < tareas.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = tareas[i].text;
         lista.appendChild(li);
     }
-
-    document.getElementById("pendientes").innerHTML = pendientes + " tareas pendientes";
 }

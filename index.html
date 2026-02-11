@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EXAMEN WEB 1.2</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXAMEN WEB 1.2</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body onload="init()">
 
-  <section class="container">
+<body>
+    <section>
 
-    <h1>EXAMEN WEB 1.2</h1>
+        <header>
+            <nav>
+                <a href="#lista">Lista</a>
+            </nav>
+        </header>
 
-    <section class="card">
-      <input type="text" id="taskInput" placeholder="Escribe una tarea">
-      <button id="addBtn">Agregar</button>
-      <p id="message"></p>
+        <main>
+
+            <section class="hero">
+                <h1>EXAMEN WEB 1.2</h1>
+                <p>Mini To-Do List</p>
+                <button id="btnFocus" type="button">iniciar</button>
+            </section>
+
+            <section id="newTask" class="card">
+                <form id="taskForm">
+                <label for="taskInput">Agrega una tarea</label>
+                <input id="taskInput" placeholder="Escribe una tarea" />
+               <button type="submit" id="btnAdd">Agregar</button>
+                </button>
+                 </form>
+            </section>
+            <ul id="taskList"></ul>
+       
+
+
+        </main>
+
+        <footer id="foot"></footer>
+
     </section>
 
-    <section class="card">
-      <p><strong>Pendientes: <span id="pendingCount">0</span></strong></p>
-      <ul id="tasks"></ul>
-    </section>
-
-    <footer id="footer">
-      Entrega: WEB-01 | Grupo: ___ | Código: ___
-    </footer>
-
-  </section>
-
-  <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
